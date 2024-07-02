@@ -1,0 +1,175 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: General_en
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: en
+  m_SharedData: {fileID: 11400000, guid: c7953d6bf0a24fa44aaa276f413fb30a, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 3641635484958720
+    m_Localized: Additional turn
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3641845862858752
+    m_Localized: Additional scores
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3644375695065088
+    m_Localized: Skill 1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3644422574800896
+    m_Localized: Skill 2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3644435124158464
+    m_Localized: Skill 2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4699625168273408
+    m_Localized: Start
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4700000378126336
+    m_Localized: Ship assembly
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4700536968019968
+    m_Localized: Begin
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4700685043728384
+    m_Localized: Upgrades
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4702326623010816
+    m_Localized: Sell ship
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4705676206768128
+    m_Localized: Organic combustion engine
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4705759648251904
+    m_Localized: Subspace Distorter
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4705761330167808
+    m_Localized: Space Sail
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4705762034810880
+    m_Localized: Ceramic hull
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4705762735259648
+    m_Localized: Dark metal hull
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4705763444097024
+    m_Localized: Living stone hull
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4705766199754752
+    m_Localized: Wooden hull
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4705765490917376
+    m_Localized: Magic wood hull
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4705764815634432
+    m_Localized: Pirate hull
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4705764110991360
+    m_Localized: Plated Hull
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4705768980578304
+    m_Localized: Wooden scout drone
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4705766828900352
+    m_Localized: Battle drone
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4705767533543424
+    m_Localized: Ether concentrator
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4705768238186496
+    m_Localized: Vortex generator
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4706136535826432
+    m_Localized: Bolt thrower
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4706223672492032
+    m_Localized: Sunny bunny
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4706222330314752
+    m_Localized: Machine gun
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4706223034957824
+    m_Localized: Molecular Splitter
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4706137404047360
+    m_Localized: Cannon
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4706138108690432
+    m_Localized: Crusher
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4706138813333504
+    m_Localized: Energy Cannon
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4716196020322304
+    m_Localized: Ship stats
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4842641321328640
+    m_Localized: Menu
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4842912009125888
+    m_Localized: To main screen
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4843298241609728
+    m_Localized: Quit the game
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4843482107314176
+    m_Localized: Reset progress
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4843647279005696
+    m_Localized: Sound volume
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4843725938982912
+    m_Localized: Music Volume
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

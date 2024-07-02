@@ -1,0 +1,180 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: General Shared Data
+  m_EditorClassIdentifier: 
+  m_TableCollectionName: General
+  m_TableCollectionNameGuidString: c7953d6bf0a24fa44aaa276f413fb30a
+  m_Entries:
+  - m_Id: 3641635484958720
+    m_Key: Turn UpgradeData Name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3641845862858752
+    m_Key: Scores UpgradeData Name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3644375695065088
+    m_Key: Skill 1 UpgradeData Name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3644422574800896
+    m_Key: Skill 2 UpgradeData Name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3644435124158464
+    m_Key: Skill 3 UpgradeData Name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4699625168273408
+    m_Key: Start game
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4700000378126336
+    m_Key: Window Label Ship Assembly
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4700536968019968
+    m_Key: Button Start Craft
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4700685043728384
+    m_Key: Window Label Upgrades
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4702326623010816
+    m_Key: Button Sell Ship
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4705676206768128
+    m_Key: Engine Combustion Name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4705759648251904
+    m_Key: Engine Distortion Name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4705761330167808
+    m_Key: Engine SunSails Name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4705762034810880
+    m_Key: Hull Ceramic Name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4705762735259648
+    m_Key: Hull DarkMetall Name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4705763444097024
+    m_Key: Hull Livestone Name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4705764110991360
+    m_Key: Hull Plated Name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4705764815634432
+    m_Key: Hull Raider Name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4705765490917376
+    m_Key: Hull Redwood Name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4705766199754752
+    m_Key: Hull Wooden Name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4705766828900352
+    m_Key: Utility Battledrone Name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4705767533543424
+    m_Key: Utility EfirConcentrator Name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4705768238186496
+    m_Key: Utility Vortex Name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4705768980578304
+    m_Key: Utility Woodendrone Name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4706136535826432
+    m_Key: Weapon Boltthrower Name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4706137404047360
+    m_Key: Weapon Cannon Name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4706138108690432
+    m_Key: Weapon Crusher Name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4706138813333504
+    m_Key: Weapon Energy Name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4706222330314752
+    m_Key: Weapon Machinegun Name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4706223034957824
+    m_Key: Weapon MolecularSplitter Name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4706223672492032
+    m_Key: Weapon SunnyBunny Name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4716196020322304
+    m_Key: Label Ship Stats
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4842641321328640
+    m_Key: Window Label Menu
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4842912009125888
+    m_Key: Button Exit Craft
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4843298241609728
+    m_Key: Button Exit Game
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4843482107314176
+    m_Key: Button Reset Progress
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4843647279005696
+    m_Key: Label Sounds Volume
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4843725938982912
+    m_Key: Label Music Volume
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 3525374433549615134
+  references:
+    version: 2
+    RefIds:
+    - rid: 3525374433549615134
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1718720314294

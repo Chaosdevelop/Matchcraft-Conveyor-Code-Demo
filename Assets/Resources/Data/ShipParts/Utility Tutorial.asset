@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4f237361814364428da809ba629afcc, type: 3}
+  m_Name: Utility Tutorial
+  m_EditorClassIdentifier: 
+  <ResourcePath>k__BackingField: Data/ShipParts/Utility Tutorial
+  <PartType>k__BackingField: 8
+  <PartName>k__BackingField:
+    m_TableReference:
+      m_TableCollectionName: GUID:c7953d6bf0a24fa44aaa276f413fb30a
+    m_TableEntryReference:
+      m_KeyId: 4705768980578304
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  <Description>k__BackingField:
+    m_TableReference:
+      m_TableCollectionName: 
+    m_TableEntryReference:
+      m_KeyId: 0
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  <Icon>k__BackingField: {fileID: 21300000, guid: 728984454c9698a459e88c36e927494c, type: 3}
+  <UseCommonGeneration>k__BackingField: 0
+  references:
+    version: 2
+    RefIds: []
