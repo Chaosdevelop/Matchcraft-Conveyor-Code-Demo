@@ -26,6 +26,7 @@ namespace Match3Game
 		GameManager gameManager;
 		ShipPartAssemblyResult results;
 
+
 		void Awake()
 		{
 			Initialize(GameManager.Instance);
@@ -130,36 +131,48 @@ namespace Match3Game
 
 			EventSystem.SendEventToAll(new ScoresChanged { NewValue = totalScore, Delta = scores });
 
-			if (type == ChipType.Blue)
+			switch (type)
 			{
-				statScores[ItemStat.Durability].AddScore(scores);
-				EventSystem.SendEventToAll(new StatScoresChanged { statType = ItemStat.Durability, Delta = scores });
+				case ChipType.Blue:
+					statScores[ItemStat.Durability].AddScore(scores);
+					EventSystem.SendEventToAll(new StatScoresChanged { statType = ItemStat.Durability, Delta = scores });
+					break;
+
+				case ChipType.Red:
+					statScores[ItemStat.Quality].AddScore(scores);
+					EventSystem.SendEventToAll(new StatScoresChanged { statType = ItemStat.Quality, Delta = scores });
+					break;
+
+				case ChipType.Green:
+					statScores[ItemStat.Design].AddScore(scores);
+					EventSystem.SendEventToAll(new StatScoresChanged { statType = ItemStat.Design, Delta = scores });
+					break;
+
+				case ChipType.Purple:
+				{
+					var skillModel = gameManager.Skills[SkillSlot.Purple];
+					skillModel.AddEnergy(scores);
+					break;
+				}
+
+				case ChipType.Yellow:
+				{
+					var skillModel = gameManager.Skills[SkillSlot.Yellow];
+					skillModel.AddEnergy(scores);
+					break;
+				}
+
+				case ChipType.Orange:
+				{
+					var skillModel = gameManager.Skills[SkillSlot.Orange];
+					skillModel.AddEnergy(scores);
+					break;
+				}
+
+				default:
+					break;
 			}
-			else if (type == ChipType.Red)
-			{
-				statScores[ItemStat.Quality].AddScore(scores);
-				EventSystem.SendEventToAll(new StatScoresChanged { statType = ItemStat.Quality, Delta = scores });
-			}
-			else if (type == ChipType.Green)
-			{
-				statScores[ItemStat.Design].AddScore(scores);
-				EventSystem.SendEventToAll(new StatScoresChanged { statType = ItemStat.Design, Delta = scores });
-			}
-			else if (type == ChipType.Yellow)
-			{
-				var skillModel = gameManager.Skills[SkillSlot.Yellow];
-				skillModel.AddEnergy(scores);
-			}
-			else if (type == ChipType.Orange)
-			{
-				var skillModel = gameManager.Skills[SkillSlot.Orange];
-				skillModel.AddEnergy(scores);
-			}
-			else if (type == ChipType.Purple)
-			{
-				var skillModel = gameManager.Skills[SkillSlot.Purple];
-				skillModel.AddEnergy(scores);
-			}
+
 
 		}
 	}

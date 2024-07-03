@@ -130,21 +130,15 @@ public class GameManager : SingletonMonobehavior<GameManager>
 	/// </summary>
 	public void NextShipType()
 	{
-		switch (progress.CurrentShipPartType)
+		progress.CurrentShipPartType = progress.CurrentShipPartType switch
 		{
-			case ShipPartType.Hull:
-				progress.CurrentShipPartType = ShipPartType.Engine;
-				break;
-			case ShipPartType.Engine:
-				progress.CurrentShipPartType = ShipPartType.Weapon;
-				break;
-			case ShipPartType.Weapon:
-				progress.CurrentShipPartType = ShipPartType.Utility;
-				break;
-			case ShipPartType.Utility:
-				progress.CurrentShipPartType = ShipPartType.Hull;
-				break;
-		}
+			ShipPartType.Hull => ShipPartType.Engine,
+			ShipPartType.Engine => ShipPartType.Weapon,
+			ShipPartType.Weapon => ShipPartType.Utility,
+			ShipPartType.Utility => ShipPartType.Hull,
+			_ => throw new System.NotSupportedException()
+		};
+
 	}
 
 	/// <summary>

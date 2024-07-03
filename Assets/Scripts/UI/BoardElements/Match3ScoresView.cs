@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 namespace Match3Game
 {
 	/// <summary>
-	/// Event struct representing a change in scores.
+	/// Event struct representing a scores change.
 	/// </summary>
 	public struct ScoresChanged
 	{

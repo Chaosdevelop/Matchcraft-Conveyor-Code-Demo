@@ -135,17 +135,19 @@ namespace Match3Game
 
 		void OnMouseEnter(Vector2Int pos)
 		{
-			if (skillTargetingPattern != null)
+			if (skillTargetingPattern == null)
 			{
-				var cellsPos = skillTargetingPattern.GetAffectedCells(pos, Rows, Columns);
+				return;
+			}
 
-				for (int x = 0; x < Rows; x++)
+			var cellsPos = skillTargetingPattern.GetAffectedCells(pos, Rows, Columns);
+
+			for (int x = 0; x < Rows; x++)
+			{
+				for (int y = 0; y < Columns; y++)
 				{
-					for (int y = 0; y < Columns; y++)
-					{
-						bool highlight = cellsPos.Contains(new Vector2Int(x, y));
-						Cells[x, y].SetHighlighted(highlight);
-					}
+					bool highlight = cellsPos.Contains(new Vector2Int(x, y));
+					Cells[x, y].SetHighlighted(highlight);
 				}
 			}
 		}

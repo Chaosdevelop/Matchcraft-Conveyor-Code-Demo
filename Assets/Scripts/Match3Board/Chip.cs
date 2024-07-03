@@ -15,7 +15,7 @@ namespace Match3Game
 	}
 
 	/// <summary>
-	/// Represents a chip in the Match3 game.
+	/// Chip in the Match3 game.
 	/// </summary>
 	public class Chip : MonoBehaviour, IChip
 	{
@@ -34,6 +34,11 @@ namespace Match3Game
 		BoxCollider2D boxCollider;
 		Action<IChip> onClickAction;
 		Action<IChip, Vector2> onSwipeAction;
+
+		const int MINIMUM_SWAP_DISTANCE = 50;
+		const float HIGHLIGHT_SCALE_TIME = 0.2f;
+		const float MOVE_SPEED_PER_UNIT = 0.1f;
+		const float DESTROY_TIME = 0.3f;
 
 		void Awake()
 		{
@@ -90,7 +95,7 @@ namespace Match3Game
 		/// <param name="onComplete">Action to execute on completion.</param>
 		public void Move(Action onComplete = null)
 		{
-			float time = Vector3.Distance(targetPos, currentPos) * 0.10f;
+			float time = Vector3.Distance(targetPos, currentPos) * MOVE_SPEED_PER_UNIT;
 			transform.DOLocalMove(targetPos, time).OnComplete(() => onComplete?.Invoke());
 		}
 
@@ -109,7 +114,7 @@ namespace Match3Game
 		/// <param name="onComplete">Action to execute on completion.</param>
 		public void DestroyChip(Action onComplete)
 		{
-			transform.DOScale(Vector3.zero, 0.30f).OnComplete(() =>
+			transform.DOScale(Vector3.zero, DESTROY_TIME).OnComplete(() =>
 			{
 				onComplete?.Invoke();
 				Destroy(gameObject);
@@ -117,13 +122,13 @@ namespace Match3Game
 		}
 
 		/// <summary>
-		/// Highlights or unhighlights the chip.
+		/// Highlights selection of the chip.
 		/// </summary>
 		/// <param name="highlight">True to highlight, false to unhighlight.</param>
 		public void Highlight(bool highlight)
 		{
 			highlightObject.SetActive(highlight);
-			transform.DOScale(highlight ? Vector3.one * 1.1f : Vector3.one, 0.2f);
+			transform.DOScale(highlight ? Vector3.one * 1.1f : Vector3.one, HIGHLIGHT_SCALE_TIME);
 		}
 
 		void OnMouseDown()
@@ -140,25 +145,30 @@ namespace Match3Game
 
 		void OnMouseDrag()
 		{
-			if (isSwipe)
+			if (!isSwipe)
 			{
-				currentTouchPosition = Input.mousePosition;
-				Vector2 direction = currentTouchPosition - startTouchPosition;
-
-				if (direction.magnitude > 50) // Minimum swipe distance
-				{
-					direction.Normalize();
-
-					if (Mathf.Abs(direction.x) > Mathf.Abs(direction.y))
-					{
-						OnSwipe(direction.x > 0 ? Vector2.right : Vector2.left);
-					}
-					else
-					{
-						OnSwipe(direction.y > 0 ? Vector2.up : Vector2.down);
-					}
-				}
+				return;
 			}
+
+			currentTouchPosition = Input.mousePosition;
+			Vector2 direction = currentTouchPosition - startTouchPosition;
+
+			if (direction.magnitude < MINIMUM_SWAP_DISTANCE)
+			{
+				return;
+			}
+
+			direction.Normalize();
+
+			if (Mathf.Abs(direction.x) > Mathf.Abs(direction.y))
+			{
+				OnSwipe(direction.x > 0 ? Vector2.right : Vector2.left);
+			}
+			else
+			{
+				OnSwipe(direction.y > 0 ? Vector2.up : Vector2.down);
+			}
+
 		}
 
 		void OnSwipe(Vector2 direction)
