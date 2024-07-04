@@ -836,9 +836,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cellPrefab: {fileID: 8827343329721479257, guid: 37c8ccf01d73d1c46bfdd67e6a55fab7, type: 3}
-  piecesContainer: {fileID: 2753881748319482648}
-  <Rows>k__BackingField: 8
-  <Columns>k__BackingField: 8
+  cellsContainer: {fileID: 2753881748319482648}
   chipsDictionary:
     list:
     - key: 0
@@ -853,6 +851,8 @@ MonoBehaviour:
       value: {fileID: 6208056398717960373, guid: 3d60476e611e0614ab6ad95d8e6e0b9b, type: 3}
     - key: 5
       value: {fileID: 6208056398717960373, guid: bd73c092aeac93c44b635cb0c4bca83a, type: 3}
+  <Rows>k__BackingField: 8
+  <Columns>k__BackingField: 8
 --- !u!1 &5845152692003757025
 GameObject:
   m_ObjectHideFlags: 0
@@ -863,7 +863,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2753881748319482648}
   m_Layer: 0
-  m_Name: PiecesContainer
+  m_Name: CellsContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -43,7 +43,17 @@ namespace Match3Game
 		void Awake()
 		{
 			boxCollider = GetComponent<BoxCollider2D>();
+			boxCollider.enabled = false;
 		}
+
+		/// <summary>
+		/// Strange collider behaviour fix;
+		/// </summary>
+		private void OnEnable()
+		{
+			boxCollider.enabled = true;
+		}
+
 
 		/// <summary>
 		/// Initializes the chip with the specified type.
@@ -87,6 +97,7 @@ namespace Match3Game
 			currentPos = current;
 			targetPos = target;
 			transform.localPosition = current;
+
 		}
 
 		/// <summary>

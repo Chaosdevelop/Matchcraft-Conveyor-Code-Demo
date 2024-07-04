@@ -15,7 +15,7 @@ namespace Match3Game
 		Cell cellPrefab;
 
 		[SerializeField]
-		Transform piecesContainer;
+		Transform cellsContainer;
 
 		[SerializeField]
 		EnumDictionary<ChipType, Chip> chipsDictionary;
@@ -58,12 +58,7 @@ namespace Match3Game
 		{
 			foreach (var cellController in cells)
 			{
-				Destroy((MonoBehaviour)cellController);
-			}
-
-			foreach (Transform child in piecesContainer)
-			{
-				Destroy(child.gameObject);
+				DestroyImmediate((MonoBehaviour)cellController);
 			}
 
 			cells.Clear();
@@ -107,7 +102,7 @@ namespace Match3Game
 		/// <returns>The created cell.</returns>
 		ICell CreateCell(int x, int y)
 		{
-			Cell cellController = Instantiate(cellPrefab, piecesContainer, false);
+			Cell cellController = Instantiate(cellPrefab, cellsContainer, false);
 			cellController.name = $"Cell {x} {y}";
 			cellController.transform.localPosition = new Vector3(x, y);
 			cellController.Initialize(x, y);
@@ -124,7 +119,7 @@ namespace Match3Game
 		{
 			ChipType pieceType = GetValidPieceType(cell.X, cell.Y);
 			var chipPrefab = chipsDictionary[pieceType];
-			Chip chip = Instantiate(chipPrefab, piecesContainer, false);
+			Chip chip = Instantiate(chipPrefab, cellsContainer, false);
 
 			chip.Initialize(pieceType);
 			chip.SetCallbacks(OnChipClick, OnChipSwipe);
@@ -234,7 +229,7 @@ namespace Match3Game
 				{
 					DoSwap(chip, targetCell.Chip);
 				}
-				selectedChip.Highlight(false);
+				selectedChip?.Highlight(false);
 				selectedChip = null;
 			}
 		}

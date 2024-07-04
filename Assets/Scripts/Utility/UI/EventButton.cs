@@ -2,6 +2,9 @@ using BaseCore;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Component for simple sending event on button click.
+/// </summary>
 [RequireComponent(typeof(Button))]
 public class EventButton : MonoBehaviour
 {
@@ -12,16 +15,12 @@ public class EventButton : MonoBehaviour
 	Button button;
 
 	/// <summary>
-	/// Initializes the button and assigns the click listener.
+	/// Initializes the button and assigns the click listener on awake.
 	/// </summary>
 	void Awake()
 	{
 		button = GetComponent<Button>();
-
-		if (button != null)
-		{
-			button.onClick.AddListener(OnButtonClick);
-		}
+		button?.onClick.AddListener(OnButtonClick);
 	}
 
 	/// <summary>
@@ -29,10 +28,7 @@ public class EventButton : MonoBehaviour
 	/// </summary>
 	void OnDestroy()
 	{
-		if (button != null)
-		{
-			button.onClick.RemoveListener(OnButtonClick);
-		}
+		button?.onClick.RemoveListener(OnButtonClick);
 	}
 
 	/// <summary>

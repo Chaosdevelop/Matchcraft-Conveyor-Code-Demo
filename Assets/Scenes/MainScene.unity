@@ -145,7 +145,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6905392409474980218, guid: 6226a93e170b56b4188c410e6264801c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -10
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6905392409474980218, guid: 6226a93e170b56b4188c410e6264801c, type: 3}
       propertyPath: m_LocalRotation.w
@@ -688,8 +688,8 @@ MonoBehaviour:
       list:
       - key: 1
         value:
-          Scores: 0
-          Stats:
+          scores: 0
+          stats:
             list:
             - key: 1
               value: 0
@@ -699,11 +699,11 @@ MonoBehaviour:
               value: 0
           shipPartInfo:
             storablePath: 
-          Done: 0
+          done: 0
       - key: 2
         value:
-          Scores: 0
-          Stats:
+          scores: 0
+          stats:
             list:
             - key: 1
               value: 0
@@ -713,11 +713,11 @@ MonoBehaviour:
               value: 0
           shipPartInfo:
             storablePath: 
-          Done: 0
+          done: 0
       - key: 4
         value:
-          Scores: 0
-          Stats:
+          scores: 0
+          stats:
             list:
             - key: 1
               value: 0
@@ -727,11 +727,11 @@ MonoBehaviour:
               value: 0
           shipPartInfo:
             storablePath: 
-          Done: 0
+          done: 0
       - key: 8
         value:
-          Scores: 0
-          Stats:
+          scores: 0
+          stats:
             list:
             - key: 1
               value: 0
@@ -741,8 +741,9 @@ MonoBehaviour:
               value: 0
           shipPartInfo:
             storablePath: 
-          Done: 0
+          done: 0
     progressInitialized: 0
+    upgradeStates: []
     CurrentShipPartType: 1
   skillsData:
     list:
@@ -846,7 +847,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2412,6 +2413,10 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 519420031}
+    - target: {fileID: 716125032048318886, guid: 025ddaa4a24d9fd498ff463c82dba721, type: 3}
+      propertyPath: m_PlaneDistance
+      value: 101
+      objectReference: {fileID: 0}
     - target: {fileID: 3799971235720348125, guid: 025ddaa4a24d9fd498ff463c82dba721, type: 3}
       propertyPath: m_Name
       value: Match3View
