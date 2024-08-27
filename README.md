@@ -29,6 +29,8 @@ The project is built with the following technologies:
 
 - Unity 2022.3+
 - C#
+- Zenject
+- R3 (UniRx)
 - DOTween
 
 ## Installation
