@@ -4,6 +4,11 @@ using UnityEngine;
 
 namespace Upgrades
 {
+
+	public struct UpgradeContext
+	{
+		public GameManager GameManager;
+	}
 	/// <summary>
 	/// Defines a base interface for upgrade effects.
 	/// </summary>
@@ -12,7 +17,7 @@ namespace Upgrades
 		/// <summary>
 		/// Applies the upgrade effect.
 		/// </summary>
-		void Apply();
+		void Apply(UpgradeContext upgradeContext);
 	}
 
 	/// <summary>
@@ -38,13 +43,14 @@ namespace Upgrades
 		[TypeSelector]
 		ISkillEnhancement[] skillEnhancements;
 
+
 		/// <summary>
 		/// Applies the skill upgrade effect.
 		/// </summary>
-		public void Apply()
+		public void Apply(UpgradeContext upgradeContext)
 		{
-			var gm = GameManager.Instance;
-			var skill = gm.Skills[targetSkillSlot];
+
+			var skill = upgradeContext.GameManager.Skills[targetSkillSlot];
 			foreach (var item in skillEnhancements)
 			{
 				item.Apply(skill);
@@ -63,10 +69,9 @@ namespace Upgrades
 		/// <summary>
 		/// Applies the extra turns effect.
 		/// </summary>
-		public void Apply()
+		public void Apply(UpgradeContext upgradeContext)
 		{
-			var gm = GameManager.Instance;
-			gm.AdditionalTurnsPerCraft += turns;
+			upgradeContext.GameManager.AddTurnsForCraft(turns);
 		}
 	}
 
@@ -81,10 +86,10 @@ namespace Upgrades
 		/// <summary>
 		/// Applies the extra scores effect.
 		/// </summary>
-		public void Apply()
+		public void Apply(UpgradeContext upgradeContext)
 		{
-			var gm = GameManager.Instance;
-			gm.AdditionalScoresPerMatch += scores;
+
+			upgradeContext.GameManager.AddScoresPerMatch(scores);
 		}
 	}
 }

@@ -3,6 +3,7 @@ using BaseCore.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 /// <summary>
 /// Manages the Ship Assembly window functionality and display.
@@ -33,6 +34,11 @@ public class ShipAssemblyWindow : BaseWindow
 	[SerializeField]
 	TextMeshProUGUI sellText;
 
+	[Inject]
+	GameManager gameManager;
+	[Inject]
+	PlayerProgress progress;
+
 	public override WindowType WindowType => WindowType.ShipAssembly;
 
 	void Awake()
@@ -51,32 +57,32 @@ public class ShipAssemblyWindow : BaseWindow
 	/// </summary>
 	void UpdateContent()
 	{
-		var gm = GameManager.Instance;
-		var parts = gm.GetParts();
+
+		var parts = gameManager.GetParts();
 
 		foreach (var item in parts)
 		{
 			craftedViews[item.Key].SetInfo(item.Value);
 		}
 
-		shipPartPreview.SetInfo(gm.GetCurrentCraftingPart().ShipPartInfo.Storable);
-		turns.text = gm.TurnsPerCraft.ToString();
-		totalScores.text = gm.GetTotalScores().ToString();
+		shipPartPreview.SetInfo(gameManager.GetCurrentCraftingPart().ShipPartInfo.Storable);
+		turns.text = gameManager.TurnsPerCraft.ToString();
+		totalScores.text = gameManager.GetTotalScores().ToString();
 
-		var stats = gm.GetTotalStats();
+		var stats = gameManager.GetTotalStats();
 		foreach (var statText in totalStats)
 		{
 			statText.Value.text = stats[statText.Key].ToString();
 		}
 
-		var shipCompleted = gm.IsShipCompleted();
+		var shipCompleted = gameManager.IsShipCompleted();
 		startCraftButton.gameObject.SetActive(!shipCompleted);
 		sellShipButton.gameObject.SetActive(shipCompleted);
 
 		if (shipCompleted)
 		{
-			var finalScores = gm.CalculateFinalScores();
-			var coins = gm.ScoresToCoins(finalScores);
+			var finalScores = gameManager.CalculateFinalScores();
+			var coins = gameManager.ScoresToCoins(finalScores);
 			sellText.text = coins.ToString();
 		}
 	}
@@ -94,11 +100,11 @@ public class ShipAssemblyWindow : BaseWindow
 	/// </summary>
 	void SellShip()
 	{
-		var gm = GameManager.Instance;
-		var finalScores = gm.CalculateFinalScores();
-		var coins = gm.ScoresToCoins(finalScores);
-		gm.ChangeCoins(coins);
-		gm.StartNewShipAssembly();
+
+		var finalScores = gameManager.CalculateFinalScores();
+		var coins = gameManager.ScoresToCoins(finalScores);
+		progress.ChangeCoins(coins);
+		gameManager.StartNewShipAssembly();
 		UpdateContent();
 	}
 

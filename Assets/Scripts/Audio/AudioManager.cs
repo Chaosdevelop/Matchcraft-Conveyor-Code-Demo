@@ -1,12 +1,12 @@
-using BaseCore.Collections;
 using System.Collections;
+using BaseCore.Collections;
 using UnityEngine;
 using UnityEngine.Audio;
 
 /// <summary>
 /// Manages audio playback for the game.
 /// </summary>
-public class AudioManager : SingletonMonobehavior<AudioManager>
+public class AudioManager : MonoBehaviour
 {
 	[SerializeField]
 	AudioSource audioSource;

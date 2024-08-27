@@ -308,7 +308,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1099, y: 484}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 400, y: 500}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &5845511267431347825
@@ -327,7 +327,6 @@ MonoBehaviour:
   costText: {fileID: 2566855175420144424}
   upgradeNameText: {fileID: 8009610237326204959}
   upgradeIcon: {fileID: 7676639991087190258}
-  <UpgradesChainType>k__BackingField: 0
 --- !u!1001 &2482565467161326124
 PrefabInstance:
   m_ObjectHideFlags: 0

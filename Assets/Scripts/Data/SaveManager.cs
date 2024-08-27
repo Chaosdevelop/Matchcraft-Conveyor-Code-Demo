@@ -68,7 +68,7 @@ public class SaveManager
 	/// <summary>
 	/// Resets the saved game data by deleting all files in the save directory.
 	/// </summary>
-	static void ResetData()
+	public static void ResetData()
 	{
 		if (Directory.Exists(PersonalPath))
 		{

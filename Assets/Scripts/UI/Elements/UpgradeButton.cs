@@ -2,6 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Upgrades;
+using Zenject;
 
 /// <summary>
 /// Manages the upgrade button functionality and display.
@@ -20,13 +21,13 @@ public class UpgradeButton : MonoBehaviour
 	[SerializeField]
 	Image upgradeIcon;
 
-	[field: SerializeField]
-	public UpgradeChainType UpgradesChainType { get; private set; }
 
-	public System.Action<UpgradeData> OnUpgrade;
+	UpgradeState upgradeState;
 
-	UpgradeData nextUpgrade;
-
+	[Inject]
+	PlayerProgress progress;
+	[Inject]
+	GameManager gameManager;
 	/// <summary>
 	/// Called when the script instance is being loaded.
 	/// </summary>
@@ -43,12 +44,18 @@ public class UpgradeButton : MonoBehaviour
 	void UpdateButton()
 	{
 		buyUpgradeButton.interactable = false;
+		upgradeNameText.text = upgradeState.UpgradeGroupData.UpgradeGroupName.GetLocalizedString();
+		upgradeIcon.sprite = upgradeState.UpgradeGroupData.Icon;
+		var nextUpgrade = upgradeState.GetNextUpgrade();
+		Debug.Log($"nextUpgrade {nextUpgrade}");
 		if (nextUpgrade != null)
 		{
 			costText.text = nextUpgrade.Cost.ToString();
-			buyUpgradeButton.interactable = GameManager.Instance.CanSpendCoins(nextUpgrade.Cost);
-			upgradeNameText.text = nextUpgrade.UpgradeName.GetLocalizedString();
-			upgradeIcon.sprite = nextUpgrade.Icon;
+			buyUpgradeButton.interactable = progress.CanSpendCoins(nextUpgrade.Cost);
+		}
+		else
+		{
+			costText.gameObject.SetActive(false);
 		}
 	}
 
@@ -56,9 +63,9 @@ public class UpgradeButton : MonoBehaviour
 	/// Sets the next available upgrade data for the button.
 	/// </summary>
 	/// <param name="upgradeData">The upgrade data to set.</param>
-	public void SetNextUpgrade(UpgradeData upgradeData)
+	public void SetUpgradeData(UpgradeState upgradeState)
 	{
-		nextUpgrade = upgradeData;
+		this.upgradeState = upgradeState;
 		UpdateButton();
 	}
 
@@ -67,11 +74,11 @@ public class UpgradeButton : MonoBehaviour
 	/// </summary>
 	void OnClick()
 	{
+		var nextUpgrade = upgradeState.GetNextUpgrade();
 		if (nextUpgrade != null)
 		{
-			GameManager.Instance.ChangeCoins(-nextUpgrade.Cost);
-			nextUpgrade.GetEffect().Apply();
-			OnUpgrade?.Invoke(nextUpgrade);
+			progress.ChangeCoins(-nextUpgrade.Cost);
+			upgradeState.DoUpgrade(new UpgradeContext { GameManager = gameManager });
 			UpdateButton();
 		}
 	}

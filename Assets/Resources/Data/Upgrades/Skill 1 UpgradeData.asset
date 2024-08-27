@@ -1,0 +1,183 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f65a9c04e35d0cd4a8d3b3310c595d35, type: 3}
+  m_Name: Skill 1 UpgradeData
+  m_EditorClassIdentifier: 
+  <ResourcePath>k__BackingField: Data/Upgrades/Skill 1 UpgradeData
+  <UpgradeGroupName>k__BackingField:
+    m_TableReference:
+      m_TableCollectionName: GUID:c7953d6bf0a24fa44aaa276f413fb30a
+    m_TableEntryReference:
+      m_KeyId: 3644375695065088
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  <Icon>k__BackingField: {fileID: 1489009830, guid: 0f9d64c4ba38faf40adac3d73b20788b, type: 3}
+  <Upgrades>k__BackingField:
+  - <Name>k__BackingField:
+      m_TableReference:
+        m_TableCollectionName: 
+      m_TableEntryReference:
+        m_KeyId: 0
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
+    <Description>k__BackingField:
+      m_TableReference:
+        m_TableCollectionName: 
+      m_TableEntryReference:
+        m_KeyId: 0
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
+    effect:
+      rid: 5948644389122211843
+    <Cost>k__BackingField: 10
+  - <Name>k__BackingField:
+      m_TableReference:
+        m_TableCollectionName: 
+      m_TableEntryReference:
+        m_KeyId: 0
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
+    <Description>k__BackingField:
+      m_TableReference:
+        m_TableCollectionName: 
+      m_TableEntryReference:
+        m_KeyId: 0
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
+    effect:
+      rid: 5948644389122211845
+    <Cost>k__BackingField: 20
+  - <Name>k__BackingField:
+      m_TableReference:
+        m_TableCollectionName: 
+      m_TableEntryReference:
+        m_KeyId: 0
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
+    <Description>k__BackingField:
+      m_TableReference:
+        m_TableCollectionName: 
+      m_TableEntryReference:
+        m_KeyId: 0
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
+    effect:
+      rid: 5948644270611365890
+    <Cost>k__BackingField: 30
+  - <Name>k__BackingField:
+      m_TableReference:
+        m_TableCollectionName: 
+      m_TableEntryReference:
+        m_KeyId: 0
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
+    <Description>k__BackingField:
+      m_TableReference:
+        m_TableCollectionName: 
+      m_TableEntryReference:
+        m_KeyId: 0
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
+    effect:
+      rid: 5948644389122211849
+    <Cost>k__BackingField: 40
+  - <Name>k__BackingField:
+      m_TableReference:
+        m_TableCollectionName: 
+      m_TableEntryReference:
+        m_KeyId: 0
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
+    <Description>k__BackingField:
+      m_TableReference:
+        m_TableCollectionName: 
+      m_TableEntryReference:
+        m_KeyId: 0
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
+    effect:
+      rid: 5948644389122211851
+    <Cost>k__BackingField: 50
+  references:
+    version: 2
+    RefIds:
+    - rid: 5948644270611365890
+      type: {class: SkillUpgradeEffect, ns: Upgrades, asm: Assembly-CSharp}
+      data:
+        targetSkillSlot: 0
+        skillEnhancements:
+        - rid: 5948644389122211848
+    - rid: 5948644389122211843
+      type: {class: SkillUpgradeEffect, ns: Upgrades, asm: Assembly-CSharp}
+      data:
+        targetSkillSlot: 0
+        skillEnhancements:
+        - rid: 5948644389122211844
+    - rid: 5948644389122211844
+      type: {class: EnableSkillEffect, ns: Skills, asm: Assembly-CSharp}
+      data: 
+    - rid: 5948644389122211845
+      type: {class: SkillUpgradeEffect, ns: Upgrades, asm: Assembly-CSharp}
+      data:
+        targetSkillSlot: 0
+        skillEnhancements:
+        - rid: 5948644389122211847
+    - rid: 5948644389122211847
+      type: {class: MaxChargesEffect, ns: Skills, asm: Assembly-CSharp}
+      data:
+        additionalMaxCharges: 10
+    - rid: 5948644389122211848
+      type: {class: MaxChargesEffect, ns: Skills, asm: Assembly-CSharp}
+      data:
+        additionalMaxCharges: 10
+    - rid: 5948644389122211849
+      type: {class: SkillUpgradeEffect, ns: Upgrades, asm: Assembly-CSharp}
+      data:
+        targetSkillSlot: 0
+        skillEnhancements:
+        - rid: 5948644389122211853
+    - rid: 5948644389122211851
+      type: {class: SkillUpgradeEffect, ns: Upgrades, asm: Assembly-CSharp}
+      data:
+        targetSkillSlot: 0
+        skillEnhancements:
+        - rid: 5948644389122211854
+    - rid: 5948644389122211853
+      type: {class: StartEnergyEffect, ns: Skills, asm: Assembly-CSharp}
+      data:
+        additionalStartCharges: 20
+    - rid: 5948644389122211854
+      type: {class: MaxChargesEffect, ns: Skills, asm: Assembly-CSharp}
+      data:
+        additionalMaxCharges: 10

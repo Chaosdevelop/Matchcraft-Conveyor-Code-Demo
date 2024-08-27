@@ -5,6 +5,8 @@ using UnityEngine;
 
 namespace UI
 {
+
+
 	/// <summary>
 	/// Manages the view and interactions for a skill in the game.
 	/// </summary>
@@ -27,15 +29,15 @@ namespace UI
 		/// </summary>
 		public System.Action<bool> OnTargetingStateChanged { get; set; }
 
+
 		/// <summary>
-		/// Initializes the skill view with the specified model and controller.
+		/// Initializes the skill view with the specified model.
 		/// </summary>
 		/// <param name="model">The skill model to initialize.</param>
-		/// <param name="controller">The grid controller to initialize.</param>
-		public void Initialize(SkillModel model, GridController controller)
+		public void Initialize(SkillModel model, GridController gridController)
 		{
+			this.gridController = gridController;
 			skillModel = model;
-			gridController = controller;
 			skillButton.Initialize(model, this);
 			skillCostIndicator.Initialize(model.SkillCost);
 			foreach (var item in chipTypeIcons)
@@ -52,15 +54,14 @@ namespace UI
 			if (skillModel.IsActiveTargeting)
 			{
 				DeactivateTargeting();
+				return;
 			}
-			else
-			{
-				OnTargetingStateChanged?.Invoke(true);
-				skillModel.ActivateTargeting();
-				gridController.OnCellClicked += HandleCellClicked;
-				gridController.ToggleTargetingSkill(true);
-				gridController.SetTargetingPattern(skillModel.Pattern);
-			}
+
+			OnTargetingStateChanged?.Invoke(true);
+			skillModel.ActivateTargeting();
+			gridController.OnCellClicked += HandleCellClicked;
+			gridController.ToggleTargetingSkill(true);
+			gridController.SetTargetingPattern(skillModel.Pattern);
 		}
 
 		/// <summary>
@@ -81,12 +82,11 @@ namespace UI
 		/// <param name="cellPosition">The position of the clicked cell.</param>
 		void HandleCellClicked(Vector2Int cellPosition)
 		{
-			if (skillModel.IsActiveTargeting && skillModel.CanUseSkill())
-			{
-				skillModel.ApplySkill(gridController, cellPosition, gridController.Rows, gridController.Columns);
-				skillModel.SpendCharge();
-				DeactivateTargeting();
-			}
+			if (!skillModel.IsActiveTargeting || !skillModel.CanUseSkill()) return;
+
+			skillModel.ApplySkill(gridController, cellPosition, gridController.Rows, gridController.Columns);
+			skillModel.SpendCharge();
+			DeactivateTargeting();
 		}
 
 		/// <summary>

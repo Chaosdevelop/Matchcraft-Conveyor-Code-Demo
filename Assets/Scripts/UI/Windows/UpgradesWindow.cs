@@ -1,4 +1,5 @@
 using UnityEngine;
+using Zenject;
 
 /// <summary>
 /// Manages the Upgrades window functionality and display.
@@ -6,32 +7,37 @@ using UnityEngine;
 public class UpgradesWindow : BaseWindow
 {
 	[SerializeField]
-	UpgradeButton[] upgradeButtons;
+	UpgradeButton upgradeButtonPrefab;
+	[SerializeField]
+	Transform buttonsArea;
+
+	/*	[Inject]
+		UpgradesArray upgrades;*/
+	[Inject]
+	PlayerProgress progress;
+	[Inject]
+	DiContainer dicontainer;
 
 	public override WindowType WindowType => WindowType.Upgrades;
 
-	void OnEnable()
+
+	void Start()
 	{
-		UpdateContent();
+		CreateContent();
 	}
 
 	/// <summary>
 	/// Updates the content of the Upgrades window.
 	/// </summary>
-	void UpdateContent()
+	void CreateContent()
 	{
-		var upgradeManager = GameManager.Instance.UpgradeManager;
 
-		foreach (var button in upgradeButtons)
+		foreach (var upgrade in progress.UpgradeStates)
 		{
-			var nextUpgrade = upgradeManager.GetNextUpgradeInChain(button.UpgradesChainType);
-			button.SetNextUpgrade(nextUpgrade);
-			button.OnUpgrade = upgrade =>
-			{
-				upgradeManager.UpgradeDone(upgrade);
-				var nextUp = upgradeManager.GetNextUpgradeInChain(button.UpgradesChainType);
-				button.SetNextUpgrade(nextUp);
-			};
+			var button = dicontainer.InstantiatePrefab(upgradeButtonPrefab).GetComponent<UpgradeButton>();
+			//	var button = Instantiate(upgradeButtonPrefab);
+			button.transform.SetParent(buttonsArea, false);
+			button.SetUpgradeData(upgrade);
 		}
 	}
 }

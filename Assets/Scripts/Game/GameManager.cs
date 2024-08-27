@@ -1,94 +1,99 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using BaseCore;
 using BaseCore.Collections;
 using Skills;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
-using Upgrades;
+using static GameSettingsInstaller;
+using static ShipPartsInstaller;
+using static SkillsInstaller;
+using static UpgradesInstaller;
+
 
 /// <summary>
 /// Manages the overall game state and player progress.
 /// </summary>
-public class GameManager : SingletonMonobehavior<GameManager>
+public class GameManager
 {
-	[SerializeField]
-	TutorialManager tutorial;
-
-	[SerializeField]
+	ShipParts shipParts;
 	PlayerProgress progress;
 
-	[SerializeField]
-	EnumDictionary<SkillSlot, SkillData> skillsData = new EnumDictionary<SkillSlot, SkillData>();
+	int initialTurns;
+	int initialScoresPerMatch;
 
-	[field: SerializeField]
-	public UpgradeManager UpgradeManager { get; private set; }
+	int additionalTurnsPerCraft;
+	int additionalScoresPerMatch;
 
-	[field: SerializeField]
-	public int InitialTurns { get; private set; }
+	/// <summary>
+	/// Gets the number of turns per craft.
+	/// </summary>
+	public int TurnsPerCraft => initialTurns + additionalTurnsPerCraft;
 
-	[field: SerializeField]
-	public int InitialScoresPerMatch { get; private set; }
+	/// <summary>
+	/// Gets the number of scores awarded per match.
+	/// </summary>
+	public int ScoresPerMatch => initialScoresPerMatch + additionalScoresPerMatch;
 
-	public int AdditionalTurnsPerCraft { get; set; }
-
-	public int AdditionalScoresPerMatch { get; set; }
+	/// <summary>
+	/// Gets the dictionary of skill models, indexed by skill slot.
+	/// </summary>
+	public EnumDictionary<SkillSlot, SkillModel> Skills { get; } = new();
 
 	List<ShipPartInfo> shipPartsAll;
 
-	public int TurnsPerCraft => InitialTurns + AdditionalTurnsPerCraft;
-
-	public int ScoresPerMatch => InitialScoresPerMatch + AdditionalScoresPerMatch;
-
-	public EnumDictionary<SkillSlot, SkillModel> Skills = new EnumDictionary<SkillSlot, SkillModel>();
-
-	void Awake()
+	/// <summary>
+	/// Initializes a new instance of the <see cref="GameManager"/> class.
+	/// </summary>
+	/// <param name="progress">The player progress data.</param>
+	/// <param name="defaultParts">The default ship parts.</param>
+	/// <param name="shipParts">The collection of ship parts.</param>
+	/// <param name="skills">The game skills data.</param>
+	/// <param name="upgrades">The array of upgrades.</param>
+	/// <param name="playerValues">The player values.</param>
+	public GameManager(PlayerProgress progress, PredefinedParts defaultParts, ShipParts shipParts, GameSkills skills,
+		UpgradesArray upgrades, PlayerValues playerValues)
 	{
+		this.progress = progress;
+		this.shipParts = shipParts;
+
+		SetSettings(playerValues);
+
 		SaveManager.Load(progress);
-		if (!progress.ProgressInitialized)
-		{
-			InitializeProgress();
-		}
+		progress.Initialize(upgrades, defaultParts, this);
+
 		EventSystem.SendEventToAll(new ResourceChanged { NewValue = progress.CurrentCoins });
-		UpgradeManager.SetStates(progress.UpgradeStates);
-		UpgradeManager.OnUpgraded += OnUpgradeDone;
 
 		shipPartsAll = StorableStorage.GetStorablesOfType<ShipPartInfo>();
 
-		foreach (var item in skillsData)
+		foreach (var (key, value) in skills.SkillsData)
 		{
-			Skills[item.Key] = item.Value.CreateSkillModel();
+			Skills[key] = value.CreateSkillModel();
 		}
 	}
 
-	/// <summary>
-	/// Initializes player progress for the first time.
-	/// </summary>
-	public void InitializeProgress()
+	void SetSettings(PlayerValues playerValues)
 	{
-		progress.ProgressInitialized = true;
-		progress.CurrentShipPartType = ShipPartType.Hull;
-		StartTutorialShipAssembly();
+		initialTurns = playerValues.TurnsForCraft;
+		initialScoresPerMatch = playerValues.ScoresPerMatch;
 	}
 
 	/// <summary>
-	/// Reset all player progress.
+	/// Adds the specified number of turns to the turns per craft.
 	/// </summary>
-	public void ResetProgress()
+	/// <param name="value">The number of turns to add.</param>
+	public void AddTurnsForCraft(int value)
 	{
-		progress = new PlayerProgress();
-		InitializeProgress();
+		additionalTurnsPerCraft += value;
 	}
 
 	/// <summary>
-	/// Starts the tutorial ship assembly.
+	/// Adds the specified number of scores to the scores per match.
 	/// </summary>
-	public void StartTutorialShipAssembly()
+	/// <param name="value">The number of scores to add.</param>
+	public void AddScoresPerMatch(int value)
 	{
-		var parts = tutorial.StartingParts;
-		foreach (var part in parts)
-		{
-			progress.ShipParts[part.Key] = CreateUndonePart(part.Value);
-		}
+		additionalScoresPerMatch += value;
 	}
 
 	/// <summary>
@@ -96,33 +101,12 @@ public class GameManager : SingletonMonobehavior<GameManager>
 	/// </summary>
 	public void StartNewShipAssembly()
 	{
-		var partTypes = System.Enum.GetValues(typeof(ShipPartType));
-		foreach (var part in partTypes)
+		var partTypes = Enum.GetValues(typeof(ShipPartType));
+		foreach (ShipPartType partType in partTypes)
 		{
-			var partType = (ShipPartType)part;
 			var randomPart = GenerateItemForCraft(partType);
-			progress.ShipParts[partType] = CreateUndonePart(randomPart);
+			progress.ShipParts[partType] = new ShipPartAssemblyResult(randomPart);
 		}
-	}
-
-	/// <summary>
-	/// Changes the player's coin count and sends an event.
-	/// </summary>
-	/// <param name="amount">The amount to change the coin count by.</param>
-	public void ChangeCoins(int amount)
-	{
-		progress.CurrentCoins += amount;
-		EventSystem.SendEventToAll(new ResourceChanged { ResourceType = ResourceType.Manacoins, NewValue = progress.CurrentCoins, Delta = amount });
-	}
-
-	/// <summary>
-	/// Checks if the player has enough coins to spend.
-	/// </summary>
-	/// <param name="amount">The amount of coins to check.</param>
-	/// <returns>True if the player has enough coins, otherwise false.</returns>
-	public bool CanSpendCoins(int amount)
-	{
-		return progress.CurrentCoins >= amount;
 	}
 
 	/// <summary>
@@ -136,20 +120,17 @@ public class GameManager : SingletonMonobehavior<GameManager>
 			ShipPartType.Engine => ShipPartType.Weapon,
 			ShipPartType.Weapon => ShipPartType.Utility,
 			ShipPartType.Utility => ShipPartType.Hull,
-			_ => throw new System.NotSupportedException()
+			_ => throw new NotSupportedException()
 		};
-
 	}
 
 	/// <summary>
 	/// Checks if the ship is fully assembled.
 	/// </summary>
 	/// <returns>True if the ship is completed, otherwise false.</returns>
-	public bool IsShipCompleted() => progress.IsShipCompleted();
-
-	ShipPartAssemblyResult CreateUndonePart(ShipPartInfo partInfo)
+	public bool IsShipCompleted()
 	{
-		return new ShipPartAssemblyResult(partInfo);
+		return progress.IsShipCompleted();
 	}
 
 	/// <summary>
@@ -169,25 +150,37 @@ public class GameManager : SingletonMonobehavior<GameManager>
 	/// Gets the current crafting part.
 	/// </summary>
 	/// <returns>The current crafting part.</returns>
-	public ShipPartAssemblyResult GetCurrentCraftingPart() => progress.CurrentCraftingPart;
+	public ShipPartAssemblyResult GetCurrentCraftingPart()
+	{
+		return progress.CurrentCraftingPart;
+	}
 
 	/// <summary>
 	/// Gets all ship parts.
 	/// </summary>
 	/// <returns>An enum dictionary of all ship parts.</returns>
-	public EnumDictionary<ShipPartType, ShipPartAssemblyResult> GetParts() => progress.ShipParts;
+	public EnumDictionary<ShipPartType, ShipPartAssemblyResult> GetParts()
+	{
+		return progress.ShipParts;
+	}
 
 	/// <summary>
 	/// Gets the total stats from all ship parts.
 	/// </summary>
 	/// <returns>An enum dictionary of total stats.</returns>
-	public EnumDictionary<ItemStat, int> GetTotalStats() => progress.GetTotalStats();
+	public EnumDictionary<ItemStat, int> GetTotalStats()
+	{
+		return progress.GetTotalStats();
+	}
 
 	/// <summary>
 	/// Gets the total scores from all ship parts.
 	/// </summary>
 	/// <returns>The total scores.</returns>
-	public int GetTotalScores() => progress.GetTotalScores();
+	public int GetTotalScores()
+	{
+		return progress.GetTotalScores();
+	}
 
 	/// <summary>
 	/// Calculates the final scores based on the total stats and scores.
@@ -195,9 +188,9 @@ public class GameManager : SingletonMonobehavior<GameManager>
 	/// <returns>The calculated final scores.</returns>
 	public int CalculateFinalScores()
 	{
-		var statsum = GetTotalStats().Sum(arg => arg.Value);
+		var statSum = GetTotalStats().Sum(arg => arg.Value);
 		var scores = GetTotalScores();
-		return (int)(scores * (1 + 0.1f * statsum));
+		return (int)(scores * (1 + 0.1f * statSum));
 	}
 
 	/// <summary>
@@ -209,10 +202,5 @@ public class GameManager : SingletonMonobehavior<GameManager>
 	{
 		var coins = scores / 100;
 		return Mathf.Max(coins, 1);
-	}
-
-	void OnUpgradeDone(List<UpgradeState> upgradeStates)
-	{
-		progress.UpgradeStates = upgradeStates;
 	}
 }

@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d30b930863979e468508a26d4859ba8, type: 3}
+  m_Name: ShipPartsInstaller
+  m_EditorClassIdentifier: 
+  StartingParts:
+    <Parts>k__BackingField:
+      list:
+      - key: 1
+        value: {fileID: 11400000, guid: 51c3206446083ea4faefe084dd3fee1f, type: 2}
+      - key: 2
+        value: {fileID: 11400000, guid: 7a81c46a63748784ab2774f1d4c5c4ee, type: 2}
+      - key: 4
+        value: {fileID: 11400000, guid: b8ad825bc9a46664aa2ce36dd87af09c, type: 2}
+      - key: 8
+        value: {fileID: 11400000, guid: 425907baf4cebcc41b44f5438c959bb5, type: 2}
+  AllParts:
+    <Parts>k__BackingField: []

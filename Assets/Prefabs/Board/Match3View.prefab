@@ -1416,49 +1416,19 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1074364174480728618, guid: e388c7d125ada4d4f976ee0e72ea463e, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 472616543146236463}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e388c7d125ada4d4f976ee0e72ea463e, type: 3}
 --- !u!224 &2104803048333413799 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1074364174458500444, guid: e388c7d125ada4d4f976ee0e72ea463e, type: 3}
   m_PrefabInstance: {fileID: 1431348354839984379}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &2104803048353684177 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1074364174480728618, guid: e388c7d125ada4d4f976ee0e72ea463e, type: 3}
-  m_PrefabInstance: {fileID: 1431348354839984379}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &472616543146236463
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2104803048353684177}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6fbcdc36654f7b4bb3db06a88e31140, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  skillButton: {fileID: 0}
-  skillCostIndicator: {fileID: 0}
-  chipTypeIcons:
-    list:
-    - key: 0
-      value: {fileID: 0}
-    - key: 1
-      value: {fileID: 0}
-    - key: 2
-      value: {fileID: 0}
 --- !u!114 &3641542896484128286 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2401667950388653797, guid: e388c7d125ada4d4f976ee0e72ea463e, type: 3}
   m_PrefabInstance: {fileID: 1431348354839984379}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2104803048353684177}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f6fbcdc36654f7b4bb3db06a88e31140, type: 3}
@@ -1919,49 +1889,19 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1074364174480728618, guid: e388c7d125ada4d4f976ee0e72ea463e, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 6353203632790180934}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e388c7d125ada4d4f976ee0e72ea463e, type: 3}
 --- !u!114 &5197208013704209095 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2401667950388653797, guid: e388c7d125ada4d4f976ee0e72ea463e, type: 3}
   m_PrefabInstance: {fileID: 7598770359168142370}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7466029095913549320}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f6fbcdc36654f7b4bb3db06a88e31140, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &7466029095913549320 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1074364174480728618, guid: e388c7d125ada4d4f976ee0e72ea463e, type: 3}
-  m_PrefabInstance: {fileID: 7598770359168142370}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &6353203632790180934
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7466029095913549320}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6fbcdc36654f7b4bb3db06a88e31140, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  skillButton: {fileID: 0}
-  skillCostIndicator: {fileID: 0}
-  chipTypeIcons:
-    list:
-    - key: 0
-      value: {fileID: 0}
-    - key: 1
-      value: {fileID: 0}
-    - key: 2
-      value: {fileID: 0}
 --- !u!224 &7466029095935883646 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1074364174458500444, guid: e388c7d125ada4d4f976ee0e72ea463e, type: 3}
@@ -2184,17 +2124,14 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1074364174480728618, guid: e388c7d125ada4d4f976ee0e72ea463e, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 3159082658145327281}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e388c7d125ada4d4f976ee0e72ea463e, type: 3}
 --- !u!114 &6631147604362279038 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2401667950388653797, guid: e388c7d125ada4d4f976ee0e72ea463e, type: 3}
   m_PrefabInstance: {fileID: 9030528530733667995}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8338987951228548273}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f6fbcdc36654f7b4bb3db06a88e31140, type: 3}
@@ -2205,30 +2142,3 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 1074364174458500444, guid: e388c7d125ada4d4f976ee0e72ea463e, type: 3}
   m_PrefabInstance: {fileID: 9030528530733667995}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &8338987951228548273 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1074364174480728618, guid: e388c7d125ada4d4f976ee0e72ea463e, type: 3}
-  m_PrefabInstance: {fileID: 9030528530733667995}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &3159082658145327281
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8338987951228548273}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6fbcdc36654f7b4bb3db06a88e31140, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  skillButton: {fileID: 0}
-  skillCostIndicator: {fileID: 0}
-  chipTypeIcons:
-    list:
-    - key: 0
-      value: {fileID: 0}
-    - key: 1
-      value: {fileID: 0}
-    - key: 2
-      value: {fileID: 0}

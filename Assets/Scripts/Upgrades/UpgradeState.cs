@@ -10,25 +10,51 @@ namespace Upgrades
 	public class UpgradeState
 	{
 		[SerializeField]
-		StorableReference<UpgradeData> upgradeData;
+		StorableReference<UpgradeGroupData> upgradeDataReference;
 
 		[SerializeField]
-		bool unlocked;
+		int upgradeLevel;
 
-		/// <summary>
-		/// Gets or sets the upgrade data.
-		/// </summary>
-		public StorableReference<UpgradeData> UpgradeData {
-			get => upgradeData;
-			set => upgradeData = value;
+		public UpgradeGroupData UpgradeGroupData => upgradeDataReference.Storable;
+
+		public UpgradeState(UpgradeGroupData upgradeGroupData)
+		{
+			this.upgradeDataReference = new StorableReference<UpgradeGroupData>(upgradeGroupData);
 		}
+
 
 		/// <summary>
 		/// Gets or sets a unlock state.
 		/// </summary>
-		public bool Unlocked {
-			get => unlocked;
-			set => unlocked = value;
+		public int UpgradeLevel {
+			get => upgradeLevel;
+			private set => upgradeLevel = value;
+		}
+
+		public void DoUpgrade(UpgradeContext upgradeContext)
+		{
+			GetNextUpgrade().ApplyUpgrade(upgradeContext);
+			UpgradeLevel++;
+		}
+
+		public UpgradeData GetNextUpgrade()
+		{
+			var upgrades = upgradeDataReference.Storable.Upgrades;
+			if (upgrades.Length > upgradeLevel)
+			{
+				return upgrades[upgradeLevel];
+			}
+
+			return null;
+		}
+
+		public void ApplyUpToLastLevel(UpgradeContext upgradeContext)
+		{
+			var upgrades = upgradeDataReference.Storable.Upgrades;
+			for (int i = 0; i < UpgradeLevel; i++)
+			{
+				upgrades[upgradeLevel].ApplyUpgrade(upgradeContext);
+			}
 		}
 	}
 }

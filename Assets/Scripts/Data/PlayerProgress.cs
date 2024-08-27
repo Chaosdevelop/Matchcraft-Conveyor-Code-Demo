@@ -1,27 +1,40 @@
-using BaseCore.Collections;
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using BaseCore;
+using BaseCore.Collections;
 using UnityEngine;
 using Upgrades;
+using static GameSettingsInstaller;
+using static ShipPartsInstaller;
+using static UpgradesInstaller;
+
 
 /// <summary>
 /// Represents the player's progress for JSON serialization.
 /// </summary>
-[System.Serializable]
+[Serializable]
 public class PlayerProgress
 {
 	[SerializeField]
 	int currentCoins;
 
 	[SerializeField]
-	EnumDictionary<ShipPartType, ShipPartAssemblyResult> shipParts = new EnumDictionary<ShipPartType, ShipPartAssemblyResult>();
+	EnumDictionary<ShipPartType, ShipPartAssemblyResult> shipParts = new();
 
 	[SerializeField]
 	bool progressInitialized;
 
 	[SerializeField]
-	List<UpgradeState> upgradeStates = new List<UpgradeState>();
+	List<UpgradeState> upgradeStates = new();
 
-	public ShipPartType CurrentShipPartType = ShipPartType.Hull;
+	/// <summary>
+	/// Gets or sets the current ship part type being assembled.
+	/// </summary>
+	[field: SerializeField]
+	public ShipPartType CurrentShipPartType { get; set; }
+
+	const ShipPartType DEFAULT_PART_TYPE = ShipPartType.Hull;
 
 	/// <summary>
 	/// Gets the current crafting part based on the current ship part type.
@@ -45,19 +58,74 @@ public class PlayerProgress
 	}
 
 	/// <summary>
-	/// Gets or sets the progress initialization status.
+	/// Gets the list of upgrade states.
 	/// </summary>
-	public bool ProgressInitialized {
-		get => progressInitialized;
-		set => progressInitialized = value;
+	public List<UpgradeState> UpgradeStates => upgradeStates;
+
+	/// <summary>
+	/// Initializes a new instance of the <see cref="PlayerProgress"/> class with the specified starting coins.
+	/// </summary>
+	/// <param name="playerValues">The player values containing the starting coin amount.</param>
+	public PlayerProgress(PlayerValues playerValues)
+	{
+		currentCoins = playerValues.StartCoins;
 	}
 
 	/// <summary>
-	/// Gets or sets the list of upgrade states.
+	/// Initializes the player progress, applying upgrades and setting up initial ship parts.
 	/// </summary>
-	public List<UpgradeState> UpgradeStates {
-		get => upgradeStates;
-		set => upgradeStates = value;
+	/// <param name="upgrades">The array of upgrades.</param>
+	/// <param name="predefinedParts">The predefined ship parts.</param>
+	/// <param name="gameManager">The game manager.</param>
+	public void Initialize(UpgradesArray upgrades, PredefinedParts predefinedParts, GameManager gameManager)
+	{
+		if (upgradeStates.Count > 0)
+		{
+			foreach (var upgradeState in upgradeStates)
+			{
+				upgradeState.ApplyUpToLastLevel(new UpgradeContext { GameManager = gameManager });
+			}
+		}
+
+		if (progressInitialized)
+		{
+			return;
+		}
+
+		progressInitialized = true;
+		CurrentShipPartType = DEFAULT_PART_TYPE;
+		upgradeStates = new List<UpgradeState>();
+		foreach (var upgrade in upgrades.AllUpgrades)
+		{
+			var state = new UpgradeState(upgrade);
+			upgradeStates.Add(state);
+		}
+
+		foreach (var (key, value) in predefinedParts.Parts)
+		{
+			ShipParts[key] = new ShipPartAssemblyResult(value);
+		}
+	}
+
+	/// <summary>
+	/// Checks if the player has enough coins to spend.
+	/// </summary>
+	/// <param name="amount">The amount of coins to check.</param>
+	/// <returns>True if the player has enough coins, otherwise false.</returns>
+	public bool CanSpendCoins(int amount)
+	{
+		return CurrentCoins >= amount;
+	}
+
+	/// <summary>
+	/// Changes the player's coin count and sends a resource changed event.
+	/// </summary>
+	/// <param name="amount">The amount to change the coin count by.</param>
+	public void ChangeCoins(int amount)
+	{
+		CurrentCoins += amount;
+		EventSystem.SendEventToAll(new ResourceChanged
+		{ ResourceType = ResourceType.Manacoins, NewValue = CurrentCoins, Delta = amount });
 	}
 
 	/// <summary>
@@ -67,13 +135,14 @@ public class PlayerProgress
 	public EnumDictionary<ItemStat, int> GetTotalStats()
 	{
 		var statsDictionary = new EnumDictionary<ItemStat, int>();
-		foreach (var part in shipParts)
+		foreach (var part in shipParts.AsDictionary().Values)
 		{
-			foreach (var stat in part.Value.Stats)
+			foreach (var (key, value) in part.Stats)
 			{
-				statsDictionary[stat.Key] += stat.Value;
+				statsDictionary[key] += value;
 			}
 		}
+
 		return statsDictionary;
 	}
 
@@ -83,12 +152,7 @@ public class PlayerProgress
 	/// <returns>The total scores.</returns>
 	public int GetTotalScores()
 	{
-		var totalScores = 0;
-		foreach (var part in shipParts)
-		{
-			totalScores += part.Value.Scores;
-		}
-		return totalScores;
+		return shipParts.AsDictionary().Values.Sum(part => part.Scores);
 	}
 
 	/// <summary>
@@ -97,13 +161,6 @@ public class PlayerProgress
 	/// <returns>True if the ship is completed, otherwise false.</returns>
 	public bool IsShipCompleted()
 	{
-		foreach (var part in shipParts)
-		{
-			if (!part.Value.Done)
-			{
-				return false;
-			}
-		}
-		return true;
+		return shipParts.AsDictionary().Values.All(part => part.Done);
 	}
 }

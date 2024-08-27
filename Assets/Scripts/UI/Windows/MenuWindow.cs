@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Localization;
 using UnityEngine.Localization.Settings;
 using UnityEngine.UI;
+using Zenject;
 
 /// <summary>
 /// Manages the menu window, including various settings and social media links.
@@ -36,6 +37,12 @@ public class MenuWindow : BaseWindow
 	[SerializeField]
 	Slider musicVolume;
 
+	[Inject]
+	GameManager gameManager;
+	[Inject]
+	AudioManager audioManager;
+	[Inject]
+	PlayerProgress progress;
 
 	void Awake()
 	{
@@ -45,8 +52,8 @@ public class MenuWindow : BaseWindow
 		localeDropdown.onValueChanged.AddListener(ChangeLocale);
 		socialDiscord.onClick.AddListener(() => Application.OpenURL("https://discord.gg/4HdZH9jP8h"));
 		socialSteam.onClick.AddListener(() => Application.OpenURL("https://store.steampowered.com/app/1816920/Matchcraft_Efir_Adventure/"));
-		soundsVolume.onValueChanged.AddListener(val => AudioManager.Instance.SoundsVolume = val);
-		musicVolume.onValueChanged.AddListener(val => AudioManager.Instance.MusicVolume = val);
+		soundsVolume.onValueChanged.AddListener(val => audioManager.SoundsVolume = val);
+		musicVolume.onValueChanged.AddListener(val => audioManager.MusicVolume = val);
 	}
 
 
@@ -58,8 +65,8 @@ public class MenuWindow : BaseWindow
 
 	void Start()
 	{
-		soundsVolume.value = AudioManager.Instance.SoundsVolume;
-		musicVolume.value = AudioManager.Instance.MusicVolume;
+		soundsVolume.value = audioManager.SoundsVolume;
+		musicVolume.value = audioManager.MusicVolume;
 	}
 
 	/// <summary>
@@ -76,7 +83,8 @@ public class MenuWindow : BaseWindow
 	/// </summary>
 	void ResetData()
 	{
-		GameManager.Instance.ResetProgress();
+		SaveManager.ResetData();
+		SaveManager.Load(progress);
 		Close();
 		EventSystem.SendEventToAll(new ScreenChangeEvent { ScreenType = ScreenType.Main });
 	}
